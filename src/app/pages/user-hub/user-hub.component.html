@@ -1,1 +1,8 @@
-<app-user-list [users]="users"></app-user-list>
+@if (getGroupKeys().length) {
+@for (groupKey of getGroupKeys(); track $index) {
+<h2>{{groupKey}}</h2>
+<app-user-list [users]="groupedUsers()[groupKey]"></app-user-list>
+}
+} @else {
+<p>Loading…</p>
+}
