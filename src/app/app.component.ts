@@ -1,23 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { UsersService } from './services/users.service'
-import { User } from './models/user.model'
-import { UserListComponent } from './components/user-list/user-list.component'
+import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [UserListComponent],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
-  usersService = inject(UsersService)
+export class AppComponent {
 
-  users: User[] = []
-
-  ngOnInit(): void {
-    this.usersService.getUsers().subscribe(users => {
-      this.users = users
-    })
-  }
 }
