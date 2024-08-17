@@ -1,5 +1,6 @@
-<div class="user-item">
-  <img class="user-item__image" loading="lazy" [src]="user().imageSrc" />
+<div class="user-item" (click)="toggleExpansion()" [attr.expanded]="isExpanded">
+  <img class="user-item__image" loading="lazy" [src]="user().imageSrc"
+    alt="{{ user().firstname }} {{ user().lastname }}" />
 
   <p class="user-item__name">
     {{ user().firstname }} {{ user().lastname }}
@@ -10,4 +11,13 @@
   <p class="user-item__phone">{{ user().phone }}</p>
 
   <p class="user-item__nat">{{ user().nat }} ({{ nationalitiesCount }})</p>
+
+  @if (isExpanded) {
+  <div class="user-extra-info">
+    <p class="user-item__dob">Date of Birth: {{ user().dob?.date | date }} ({{user().dob?.age}})</p>
+    <p class="user-item__address">
+      Address: {{user().formattedAddress}}
+    </p>
+  </div>
+  }
 </div>

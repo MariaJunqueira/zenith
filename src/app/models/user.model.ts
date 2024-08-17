@@ -1,4 +1,4 @@
-import { UserResult } from './api-result.model'
+import { DateOfBirthday, UserResult } from './api-result.model'
 
 interface LoginInfo extends Object {
   uuid: string
@@ -10,6 +10,21 @@ interface LoginInfo extends Object {
   sha256: string
 }
 
+interface Location {
+  street: {
+    number: number;
+    name: string;
+  };
+  city: string;
+  state: string;
+  country: string;
+  postcode: string | number;
+  timezone: {
+    offset: string;
+    description: string;
+  };
+}
+
 export class User {
   firstname?: string
   lastname?: string
@@ -18,6 +33,8 @@ export class User {
   image?: string
   nat?: string
   login?: LoginInfo
+  location?: Location;
+  dob?: DateOfBirthday;
 
   constructor(data: Partial<User> = {}) {
     Object.assign(this, data)
@@ -32,6 +49,15 @@ export class User {
   }
 
   /**
+   * Gets a formatted address string.
+   */
+  get formattedAddress(): string {
+    if (!this.location) return '';
+    const { street, city, state, country, postcode } = this.location;
+    return `${street.number} ${street.name}, ${city}, ${state}, ${country} ${postcode}`;
+  }
+
+  /**
    * Maps the api result to an array of User objects
    * @param {UserResult[]} userResults
    * @returns {User[]}
@@ -43,8 +69,10 @@ export class User {
       email: user.email,
       phone: user.phone,
       image: user.picture.medium,
+      location: user.location,
       nat: user.nat,
-      login: user.login
+      login: user.login,
+      dob: user.dob
     }))
   }
 }
