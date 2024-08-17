@@ -1,11 +1,14 @@
-@if (users().length) {
-  <article class="user-list">
-    @for (user of users(); track $index) {
-      <app-user-item [user]="user" [allUsers]="users()" />
+<article class="user-list">
+  @if (getGroupKeys().length) {
+  @for (groupKey of getGroupKeys(); track $index) {
+  <section class="user-group">
+    <h2 class="group-title">{{ groupKey }}</h2>
+    @for (user of groupedUsers()[groupKey]; track $index) {
+    <app-user-item [user]="user" [allUsers]="users()" />
     }
-  </article>
-} @else {
-  <article class="user-list">
-    <p>Loading…</p>
-  </article>
-}
+  </section>
+  }
+  } @else {
+  <p>Loading…</p>
+  }
+</article>
