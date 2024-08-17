@@ -1,8 +1,9 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { UserListComponent } from '../../components/user-list/user-list.component';
 import { User } from '../../models/user.model';
 import { UsersServiceStub } from '../../services/users.service.stub';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-hub',
@@ -12,25 +13,23 @@ import { UsersServiceStub } from '../../services/users.service.stub';
   styleUrl: './user-hub.component.scss'
 })
 export class UserHubComponent {
-  usersService = inject(UsersServiceStub)
-  groupedUsers = signal<Record<string, User[]>>({});
-  users: User[] = []
+  usersService = inject(UsersServiceStub);
+  groupedUsers: Record<string, User[]> = {};
+  users: User[] = [];
   category = 'nat';
+  displayedPages: number[] = [];
 
-  constructor() {
-    effect(() => {
-      if (this.users.length) {
-        this.groupUsers(this.category);
-      }
-    });
-  }
+  pagination: {
+    currentPage: number;
+    pageSize: number;
+  } = {
+      currentPage: 1,
+      pageSize: 5000
+    };
 
   ngOnInit(): void {
-    this.usersService.getUsers().subscribe(users => {
-      this.users = users
-    })
+    this.loadUsers(this.pagination.currentPage);
   }
-
 
   private groupUsers(category: string): void {
     if (typeof Worker !== 'undefined') {
@@ -40,14 +39,14 @@ export class UserHubComponent {
 
         const groupedUsers = this.mapToUserInstances(groupedData);
 
-        this.groupedUsers.set(groupedUsers);
+        this.groupedUsers = groupedUsers;
 
         worker.terminate();
       };
 
       worker.postMessage({ items: this.users, category });
     } else {
-      this.groupedUsers.set(this.fallbackGrouping(this.users, category));
+      this.groupedUsers = this.fallbackGrouping(this.users, category);
     }
   }
 
@@ -68,6 +67,40 @@ export class UserHubComponent {
   }
 
   getGroupKeys(): string[] {
-    return Object.keys(this.groupedUsers());
+    return Object.keys(this.groupedUsers);
+  }
+
+  /**
+   * Loads users for the given page and updates the current page.
+   * @param page The page number to load.
+   */
+  loadUsers(page: number): void {
+    this.usersService.getUsers(page, this.pagination.pageSize).subscribe(users => {
+      this.users = users;
+      this.pagination.currentPage = page;
+      this.groupUsers(this.category);
+      this.updateDisplayedPages();
+    });
+  }
+
+  /**
+   * Handles user pagination.
+   * @param page The page number to load.
+   */
+  onPageChange(page: number): void {
+    if (page > 0) {
+      this.loadUsers(page);
+    }
+  }
+
+  /**
+   * Updates the array of page numbers to be displayed.
+   * Assumes that at least three pages are available to display.
+   */
+  private updateDisplayedPages(): void {
+    const currentPage = this.pagination.currentPage;
+    const pagesToShow = 3;
+
+    this.displayedPages = Array.from({ length: pagesToShow }, (_, index) => currentPage + index);
   }
 }

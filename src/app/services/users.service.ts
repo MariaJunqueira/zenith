@@ -18,9 +18,9 @@ export class UsersService {
    * @param {number} page
    * @returns {Observable<User[]>}
    */
-  getUsers(page = 1): Observable<User[]> {
+  getUsers(page: number = 1, pageSize: number = 5000): Observable<User[]> {
     return this.httpClient
-      .get<ApiResult>(`${this.apiUrl}?results=5000&seed=awork&page=${page}`)
+      .get<ApiResult>(`${this.apiUrl}?&results=${pageSize}&seed=awork&page=${page}`)
       .pipe(map(apiResult => User.mapFromUserResult(apiResult.results)))
   }
 }

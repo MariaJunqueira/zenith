@@ -1,7 +1,18 @@
+<div class="pagination-controls">
+  <button (click)="onPageChange(pagination.currentPage - 1)" [disabled]="pagination.currentPage === 1">Previous</button>
+
+  @for (page of displayedPages; track $index) {
+  <button [class.active]="page === pagination.currentPage" (click)="onPageChange(page)">
+    {{ page }}
+  </button>
+  }
+  <button (click)="onPageChange(pagination.currentPage + 1)">Next</button>
+</div>
+
 @if (getGroupKeys().length) {
 @for (groupKey of getGroupKeys(); track $index) {
 <h2>{{groupKey}}</h2>
-<app-user-list [users]="groupedUsers()[groupKey]"></app-user-list>
+<app-user-list [users]="groupedUsers[groupKey]"></app-user-list>
 }
 } @else {
 <p>Loading…</p>

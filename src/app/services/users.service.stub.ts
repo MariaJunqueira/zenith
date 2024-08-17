@@ -14,7 +14,7 @@ export class UsersServiceStub {
    * @param {number} page
    * @returns {Observable<User[]>}
    */
-  getUsers(page = 1): Observable<User[]> {
+  getUsers(page: number = 1, pageSize: number = 5000): Observable<User[]> {
     return of(MockResult).pipe(
       map(apiResult => User.mapFromUserResult(apiResult.results as UserResult[]))
     );
