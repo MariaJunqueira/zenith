@@ -1,0 +1,40 @@
+@import "ease/ease-import.scss";
+
+.app-user-hub {
+  padding: $spacing-xxxxl 0;
+  display: flex;
+  flex-direction: column;
+
+  & > section {
+    margin-bottom: $spacing-xxxxl;
+    display: flex;
+    justify-content: center;
+
+    & > div {
+      width: 60%;
+      padding: $spacing-m;
+      display: flex;
+      justify-content: center;
+      gap: $spacing-xl;
+      border: 6px solid var(--color-sky);
+      border-radius: $border-size-m;
+      background-color: var(--color-white);
+
+      input {
+        flex: 1 1 60%;
+      }
+
+      select {
+        flex: 1 1 40%;
+      }
+    }
+  }
+
+  & > nav {
+    padding-top: $spacing-xxxxl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-s;
+  }
+}
