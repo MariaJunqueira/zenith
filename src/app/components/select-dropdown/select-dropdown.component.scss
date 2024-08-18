@@ -1,7 +1,33 @@
-select {
-  width: 100%;
-}
+@import "ease/ease-import.scss";
 
 :host {
   display: block;
+
+  & > label {
+    position: relative;
+    display: block;
+
+    & > span {
+      background-color: var(--color-white);
+      position: absolute;
+      top: 0;
+      left: $spacing-l;
+      transform: translateY(-50%);
+      font-size: $font-size-extra-small;
+      line-height: $line-height-extra-small;
+    }
+
+    & > select {
+      width: 100%;
+      padding: $spacing-s $spacing-l;
+      font-size: inherit;
+      border: $spacing-xxs solid $color-fog;
+      border-radius: $spacing-s;
+      -webkit-appearance: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }
