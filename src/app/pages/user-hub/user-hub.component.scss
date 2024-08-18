@@ -66,6 +66,10 @@
     align-items: center;
     justify-content: center;
     gap: $spacing-s;
+
+    & > button {
+      padding: $spacing-l;
+    }
   }
 
   .user-loading {
