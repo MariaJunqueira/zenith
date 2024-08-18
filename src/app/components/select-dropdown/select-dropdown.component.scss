@@ -15,6 +15,7 @@
       transform: translateY(-50%);
       font-size: $font-size-extra-small;
       line-height: $line-height-extra-small;
+      padding: 0 $spacing-xs;
     }
 
     & > select {

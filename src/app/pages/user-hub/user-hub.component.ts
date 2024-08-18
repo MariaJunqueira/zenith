@@ -12,7 +12,7 @@ import { SelectDropdownComponent, SelectOption } from '../../components/select-d
   standalone: true,
   imports: [UserListComponent, ScrollNearEdgeDirective, SearchComponent, SelectDropdownComponent],
   templateUrl: './user-hub.component.html',
-  styleUrls: ['./user-hub.component.scss']
+  styleUrl: './user-hub.component.scss'
 })
 export class UserHubComponent implements OnInit {
   usersService = inject(UsersService);
@@ -37,7 +37,7 @@ export class UserHubComponent implements OnInit {
 
   pagination = {
     currentPage: 1,
-    pageSize: 100,
+    pageSize: 5000,
   };
 
   loading = false;
@@ -99,11 +99,9 @@ export class UserHubComponent implements OnInit {
 
     if (searchTerm) {
       this.filteredUsers.set(this.users.filter(user => `${user.firstname} ${user.lastname}`.toLowerCase().includes(searchTerm.toLowerCase())));
-      this.groupUsers(this.category(), this.filteredUsers());
       this.updateDisplayedPages();
     } else {
       this.filteredUsers.set(this.users);
-      this.groupUsers(this.category(), this.filteredUsers());
       this.updateDisplayedPages();
     }
   }
@@ -156,8 +154,6 @@ export class UserHubComponent implements OnInit {
         this.users = users;
         this.pagination.currentPage = page;
         this.currentInternalIndex = 0;
-        this.groupUsers(this.category());
-        this.updateDisplayedPages();
       }, complete: () => {
         this.loading = false;
       }
