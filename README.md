@@ -1,6 +1,6 @@
 # Awork Challenge
 
-Hi there! 👋 Welcome to the Awork challenge. We’re excited to see what you create! If you have any questions, don’t hesitate to reach out. Below are the steps to get you up and running with the application.
+Live version available [here](https://zenith-3c5dc.web.app/users)
 
 ### Prerequisites
 

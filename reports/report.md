@@ -184,4 +184,3 @@ Given more time, I would have implemented the following additional features to f
 - **Error handling:** Implementing robust error handling across the application to improve reliability.
 - **Windowing for infinite scroll:** Implementing windowing in my solution to further optimize the rendering of large lists.
 - **Last updated:** Add visual element with last time where the cache was updated.
-
