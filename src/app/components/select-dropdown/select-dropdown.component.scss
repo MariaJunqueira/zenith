@@ -25,6 +25,7 @@
       border: $spacing-xxs solid $color-fog;
       border-radius: $spacing-s;
       -webkit-appearance: none;
+      background: none;
 
       &:focus {
         outline: none;
