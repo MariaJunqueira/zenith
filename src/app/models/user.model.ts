@@ -33,8 +33,9 @@ export class User {
   image?: string
   nat?: string
   login?: LoginInfo
-  location?: Location;
-  dob?: DateOfBirthday;
+  location?: Location
+  dob?: DateOfBirthday
+  index?: number  // Optional index property for tracking
 
   constructor(data: Partial<User> = {}) {
     Object.assign(this, data)
@@ -52,18 +53,18 @@ export class User {
    * Gets a formatted address string.
    */
   get formattedAddress(): string {
-    if (!this.location) return '';
-    const { street, city, state, country, postcode } = this.location;
-    return `${street.number} ${street.name}, ${city}, ${state}, ${country} ${postcode}`;
+    if (!this.location) return ''
+    const { street, city, state, country, postcode } = this.location
+    return `${street.number} ${street.name}, ${city}, ${state}, ${country} ${postcode}`
   }
 
   /**
-   * Maps the api result to an array of User objects
+   * Maps the api result to an array of User objects and assigns index to each user.
    * @param {UserResult[]} userResults
    * @returns {User[]}
    */
   static mapFromUserResult(userResults: UserResult[]): User[] {
-    return userResults.map(user => new User({
+    return userResults.map((user, i) => new User({
       firstname: user.name.first,
       lastname: user.name.last,
       email: user.email,
@@ -72,7 +73,8 @@ export class User {
       location: user.location,
       nat: user.nat,
       login: user.login,
-      dob: user.dob
+      dob: user.dob,
+      index: i
     }))
   }
 }

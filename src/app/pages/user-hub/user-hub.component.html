@@ -6,14 +6,17 @@
     {{ page }}
   </button>
   }
+
   <button (click)="onPageChange(pagination.currentPage + 1)">Next</button>
 </div>
 
-@if (getGroupKeys().length) {
-@for (groupKey of getGroupKeys(); track $index) {
-<h2>{{groupKey}}</h2>
-<app-user-list [users]="groupedUsers[groupKey]"></app-user-list>
-}
-} @else {
-<p>Loading…</p>
-}
+<div class="user-container" appScrollNearEdge (nearEdge)="onNearEdgeScroll($event)">
+  @if (getGroupKeys().length) {
+  @for (groupKey of getGroupKeys(); track $index) {
+  <h2>{{ groupKey }}</h2>
+  <app-user-list [users]="visibleUsers[groupKey]"></app-user-list>
+  }
+  } @else {
+  <p>Loading…</p>
+  }
+</div>
