@@ -3,7 +3,8 @@
   <section>
     <div>
       <app-search (searchChange)="onSearch($event)"></app-search>
-      <app-select-dropdown [options]="categoryOptions" [(selectedValue)]="category"></app-select-dropdown>
+      <app-select-dropdown [options]="categoryOptions" [(selectedValue)]="category"
+        (selectedValueChange)="resetVisibleItems()"></app-select-dropdown>
     </div>
   </section>
   }

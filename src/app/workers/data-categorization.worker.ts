@@ -17,7 +17,7 @@ function handleDataMessage<T>({ data }: MessageEvent) {
  * @param category - The key to group items by.
  * @param chunkSize - The size of each chunk to process.
  */
-function processItemsInChunks<T>(items: T[], category: keyof T, chunkSize: number = 200): void {
+function processItemsInChunks<T>(items: T[], category: string, chunkSize: number = 200): void {
   if (items.length === 0) {
     postMessage({});
     return;
@@ -46,13 +46,42 @@ function processItemsInChunks<T>(items: T[], category: keyof T, chunkSize: numbe
  * @param category - The key to group items by.
  * @returns A record of grouped items.
  */
-function groupItemsByCategory<T>(items: T[], groupedItems: Record<string, T[]>, category: keyof T): Record<string, T[]> {
-  return items.reduce((acc, item) => {
-    const key = item[category] as string;
+function groupItemsByCategory<T>(items: T[], groupedItems: Record<string, T[]>, categoryPath: string): Record<string, T[]> {
+  // Group the items first
+  const grouped = items.reduce((acc, item) => {
+    let key: string;
+
+    // Handle special case for grouping by the first letter of the name
+    if (categoryPath.includes('name')) {
+      const name = getNestedValue(item, categoryPath) as string;
+      key = name.charAt(0).toUpperCase(); // Get the first letter and convert it to uppercase
+    } else {
+      key = getNestedValue(item, categoryPath) as string;
+    }
+
     if (!acc[key]) {
       acc[key] = [];
     }
     acc[key].push(item);
     return acc;
   }, groupedItems);
+
+  // Sort the grouped keys alphabetically
+  const sortedGrouped: Record<string, T[]> = {};
+  Object.keys(grouped).sort().forEach(key => {
+    sortedGrouped[key] = grouped[key];
+  });
+
+  return sortedGrouped;
 }
+
+/**
+ * Utility function to get the value of a nested property from an object.
+ * @param obj The object to retrieve the value from.
+ * @param path The path to the property, e.g., 'dob.age' or 'nat'.
+ * @returns The value of the property at the given path.
+ */
+function getNestedValue<T>(obj: T, path: string): any {
+  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+}
+

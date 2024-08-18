@@ -17,10 +17,6 @@ export class SelectDropdownComponent {
   selectedValue = input<string>('');
   selectedValueChange = output<string>();
 
-  ngOnInit() {
-    console.log(this.options());
-  }
-
   onSelectChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     this.selectedValueChange.emit(target.value);

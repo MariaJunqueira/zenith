@@ -16,28 +16,31 @@ import { SelectDropdownComponent, SelectOption } from '../../components/select-d
 })
 export class UserHubComponent implements OnInit {
   usersService = inject(UsersService);
-  groupedUsers: Record<string, User[]> = {};
-  visibleUsers: Record<string, User[]> = {}; // To hold the currently visible users
-  allLoadedUsers: Record<string, User[]> = {}; // To hold all users that have been loaded
+
   users: User[] = [];
+  groupedUsers: Record<string, User[]> = {};
   filteredUsers = signal<User[]>([]);
 
-  category = signal<string>('nat');
-
   displayedPages: number[] = [];
+  visibleUsers: Record<string, User[]> = {}; // To hold the currently visible users
+  allLoadedUsers: Record<string, User[]> = {}; // To hold all users that have been loaded
   private internalChunkSize = 20;
   private currentInternalIndex = 0;  // Track how many users have been loaded
+
+  category = signal<string>('dob.age');
+  categoryOptions: SelectOption[] = [
+    { label: 'Age', value: 'dob.age' },
+    { label: 'Alphabetically', value: 'firstname' },
+    { label: 'Gender', value: 'gender' },
+    { label: 'Nationality', value: 'nat' },
+  ];
 
   pagination = {
     currentPage: 1,
     pageSize: 100,
   };
-  loading = false;
 
-  categoryOptions: SelectOption[] = [
-    { label: 'Nationality', value: 'nat' },
-    { label: 'Gender', value: 'gender' },
-  ];
+  loading = false;
 
   constructor() {
     effect(() => {
@@ -47,6 +50,13 @@ export class UserHubComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers(this.pagination.currentPage);
+  }
+
+  resetVisibleItems() {
+    this.visibleUsers = {};
+    this.allLoadedUsers = {}
+    this.groupedUsers = {}
+    this.currentInternalIndex = 0;
   }
 
   /**
@@ -84,6 +94,9 @@ export class UserHubComponent implements OnInit {
    */
   onSearch(searchTerm: string) {
     this.visibleUsers = {};
+    this.allLoadedUsers = {}
+    this.currentInternalIndex = 0;
+
     if (searchTerm) {
       this.filteredUsers.set(this.users.filter(user => `${user.firstname} ${user.lastname}`.toLowerCase().includes(searchTerm.toLowerCase())));
       this.groupUsers(this.category(), this.filteredUsers());
