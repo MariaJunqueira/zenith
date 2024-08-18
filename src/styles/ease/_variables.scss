@@ -229,7 +229,7 @@ $bg-colors: (
  * GRADIENTS
  */
 
-$gradient-purple: linear-gradient(135deg, #e0d7fe 0%, #efdaf6 53%, #fdf3e9 100%);
+$gradient-purple: linear-gradient(to bottom, $color-purple-300 0%, $color-purple-100 53%, $color-orange-50 100%);
 $gradient-onboarding: linear-gradient(
     135deg,
     rgba(190, 171, 255, 1) 0%,
@@ -277,6 +277,7 @@ $s: 540px !default;
 $m: 810px !default;
 $l: 1080px !default;
 $xl: 1280px !default;
+
 $breakpoints: (
   xs: $xs,
   s: $s,

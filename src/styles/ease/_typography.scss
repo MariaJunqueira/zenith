@@ -1,17 +1,6 @@
 @import './_mixins.scss';
 @import './_variables.scss';
 
-body,
-html {
-  font-family: $font-family;
-  font-size: $font-size-normal;
-  font-weight: $font-weight-normal;
-  line-height: $line-height-normal;
-  color: var(--color-text-light);
-  text-rendering: geometricPrecision;
-  -webkit-backface-visibility: hidden;
-}
-
 /* TEXT */
 
 .aw-2-txt--l,
