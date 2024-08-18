@@ -1,11 +1,12 @@
 import { Component, effect, inject, OnInit, signal } from '@angular/core';
-import { UserListComponent } from '../../components/user-list/user-list.component';
-import { User } from '../../models/user.model';
-import { UsersServiceStub } from '../../services/users.service.stub';
-import { UsersService } from '../../services/users.service';
-import { ScrollNearEdgeDirective } from '../../directives/scroll-near-end.directive';
+import { ActivatedRoute } from '@angular/router';
+
 import { SearchComponent } from '../../components/search/search.component';
 import { SelectDropdownComponent, SelectOption } from '../../components/select-dropdown/select-dropdown.component';
+import { UserListComponent } from '../../components/user-list/user-list.component';
+import { ScrollNearEdgeDirective } from '../../directives/scroll-near-end.directive';
+import { User } from '../../models/user.model';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-hub',
@@ -16,6 +17,7 @@ import { SelectDropdownComponent, SelectOption } from '../../components/select-d
 })
 export class UserHubComponent implements OnInit {
   usersService = inject(UsersService);
+  activatedRoute = inject(ActivatedRoute);
 
   users: User[] = [];
   groupedUsers: Record<string, User[]> = {};
@@ -49,7 +51,7 @@ export class UserHubComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadUsers(this.pagination.currentPage);
+    this.users = this.activatedRoute.snapshot.data['users'];
   }
 
   resetVisibleItems() {
@@ -154,6 +156,8 @@ export class UserHubComponent implements OnInit {
         this.users = users;
         this.pagination.currentPage = page;
         this.currentInternalIndex = 0;
+        this.groupUsers(this.category());
+        this.updateDisplayedPages();
       }, complete: () => {
         this.loading = false;
       }
