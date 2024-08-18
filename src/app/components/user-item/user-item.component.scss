@@ -1,10 +1,9 @@
-@import 'ease/ease-import.scss';
+@import "ease/ease-import.scss";
 
 :host {
   .user-item {
     align-items: center;
     border-bottom: 1px solid $color-fog;
-    box-sizing: border-box;
     display: flex;
     flex-wrap: nowrap;
     height: 60px;
