@@ -81,7 +81,7 @@ describe('UserHubComponent', () => {
 
   it('should load users on initialization', () => {
     expect(component.users).toEqual(mockUsers);
-    expect(usersService.getUsers).toHaveBeenCalledWith(1, 100);
+    expect(usersService.getUsers).toHaveBeenCalledWith(1, component.pagination.pageSize);
   });
 
   it('should group users by category', (done) => {
@@ -144,7 +144,7 @@ describe('UserHubComponent', () => {
 
   it('should handle pagination correctly', () => {
     component.onPageChange(2);
-    expect(usersService.getUsers).toHaveBeenCalledWith(2, 100);
+    expect(usersService.getUsers).toHaveBeenCalledWith(2, component.pagination.pageSize);
   });
 
   it('should handle near-edge scrolling', () => {

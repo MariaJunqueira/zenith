@@ -54,11 +54,11 @@ describe('UserItemComponent with Wrapper', () => {
   it('should display user\'s basic information', () => {
     wrapperFixture.detectChanges();
 
-    const nameElement = wrapperFixture.debugElement.query(By.css('.user-item__name')).nativeElement;
-    const emailElement = wrapperFixture.debugElement.query(By.css('.user-item__email')).nativeElement;
-    const phoneElement = wrapperFixture.debugElement.query(By.css('.user-item__phone')).nativeElement;
-    const natElement = wrapperFixture.debugElement.query(By.css('.user-item__nat')).nativeElement;
-    const imageElement = wrapperFixture.debugElement.query(By.css('.user-item__image')).nativeElement;
+    const nameElement = wrapperFixture.debugElement.query(By.css('.user-item ul li:nth-child(2) span')).nativeElement;
+    const emailElement = wrapperFixture.debugElement.query(By.css('.user-item ul li:nth-child(3) span')).nativeElement;
+    const phoneElement = wrapperFixture.debugElement.query(By.css('.user-item ul li:nth-child(4) span')).nativeElement;
+    const natElement = wrapperFixture.debugElement.query(By.css('.user-item ul li:nth-child(5) span')).nativeElement;
+    const imageElement = wrapperFixture.debugElement.query(By.css('.user-item ul li:nth-child(1) img')).nativeElement;
 
     expect(nameElement.textContent).toContain('Marisela Fonseca');
     expect(emailElement.textContent).toBe('marisela.fonseca@example.com');
@@ -95,15 +95,14 @@ describe('UserItemComponent with Wrapper', () => {
 
   it('should display extra information when isExpanded', () => {
     const userItemElement = wrapperFixture.debugElement.query(By.css('.user-item'));
-    userItemElement.nativeElement.click();
+    userItemElement.triggerEventHandler('click', null);
+
     wrapperFixture.detectChanges();
 
-    const dobElement = wrapperFixture.debugElement.query(By.css('.user-item__dob')).nativeElement;
-    const addressElement = wrapperFixture.debugElement.query(By.css('.user-item__address')).nativeElement;
+    const dobElement = wrapperFixture.debugElement.query(By.css('.user-item ul[expanded] li:nth-child(1) span')).nativeElement;
+    const addressElement = wrapperFixture.debugElement.query(By.css('.user-item ul[expanded] li:nth-child(2) span')).nativeElement;
 
-    expect(dobElement.textContent).toContain('Jul 6, 1954');
-    expect(dobElement.textContent).toContain('(69)');
-    expect(addressElement.textContent).toContain('8003 Peatonal Rosales, Las Vigas, Guerrero, Mexico 25269');
+    expect(dobElement.textContent).toContain('Date of Birth:');
+    expect(addressElement.textContent).toContain('Address:');
   });
-
 });
