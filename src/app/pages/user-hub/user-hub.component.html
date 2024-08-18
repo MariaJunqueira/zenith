@@ -1,3 +1,5 @@
+<app-search (searchChange)="onSearch($event)"></app-search>
+
 <div class="pagination-controls">
   <button (click)="onPageChange(pagination.currentPage - 1)" [disabled]="pagination.currentPage === 1">Previous</button>
 

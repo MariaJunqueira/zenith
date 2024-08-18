@@ -1,14 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { UserListComponent } from '../../components/user-list/user-list.component';
 import { User } from '../../models/user.model';
 import { UsersServiceStub } from '../../services/users.service.stub';
 import { UsersService } from '../../services/users.service';
 import { ScrollNearEdgeDirective } from '../../directives/scroll-near-end.directive';
+import { SearchComponent } from '../../components/search/search.component';
 
 @Component({
   selector: 'app-user-hub',
   standalone: true,
-  imports: [UserListComponent, ScrollNearEdgeDirective],
+  imports: [UserListComponent, ScrollNearEdgeDirective, SearchComponent],
   templateUrl: './user-hub.component.html',
   styleUrls: ['./user-hub.component.scss']
 })
@@ -18,15 +19,23 @@ export class UserHubComponent implements OnInit {
   visibleUsers: Record<string, User[]> = {}; // To hold the currently visible users
   allLoadedUsers: Record<string, User[]> = {}; // To hold all users that have been loaded
   users: User[] = [];
+  filteredUsers = signal<User[]>([]);
+
   category = 'nat';
   displayedPages: number[] = [];
-  private internalChunkSize = 20;  // Number of users to load initially and on each scroll
+  private internalChunkSize = 20;
   private currentInternalIndex = 0;  // Track how many users have been loaded
 
   pagination = {
     currentPage: 1,
     pageSize: 5000,
   };
+
+  constructor() {
+    effect(() => {
+      this.groupUsers(this.category, this.filteredUsers());
+    })
+  }
 
   ngOnInit(): void {
     this.loadUsers(this.pagination.currentPage);
@@ -37,7 +46,7 @@ export class UserHubComponent implements OnInit {
    * Uses a web worker for performance, or falls back to a synchronous method.
    * @param category The category to group users by.
    */
-  private groupUsers(category: string): void {
+  private groupUsers(category: string, users?: User[]): void {
     if (typeof Worker !== 'undefined') {
       const worker = new Worker(new URL('../../workers/data-categorization.worker', import.meta.url));
       worker.onmessage = ({ data }) => {
@@ -48,15 +57,33 @@ export class UserHubComponent implements OnInit {
 
         // Store all grouped users in `allLoadedUsers`
         this.allLoadedUsers = { ...this.groupedUsers };
+
         this.updateVisibleUsers();
         worker.terminate();
       };
 
-      worker.postMessage({ items: this.users, category });
+      worker.postMessage({ items: users || this.users, category });
     } else {
-      this.groupedUsers = this.fallbackGrouping(this.users, category);
+      this.groupedUsers = this.fallbackGrouping(users || this.users, category);
       this.allLoadedUsers = { ...this.groupedUsers }; // Store all grouped users in `allLoadedUsers`
       this.updateVisibleUsers();
+    }
+  }
+
+  /**
+   * Handles the search event and filters users based on the search term.
+   * @param searchTerm The search term to filter users by.
+   */
+  onSearch(searchTerm: string) {
+    this.visibleUsers = {};
+    if (searchTerm) {
+      this.filteredUsers.set(this.users.filter(user => `${user.firstname} ${user.lastname}`.toLowerCase().includes(searchTerm.toLowerCase())));
+      this.groupUsers(this.category, this.filteredUsers());
+      this.updateDisplayedPages();
+    } else {
+      this.filteredUsers.set(this.users);
+      this.groupUsers(this.category, this.filteredUsers());
+      this.updateDisplayedPages();
     }
   }
 
@@ -119,8 +146,8 @@ export class UserHubComponent implements OnInit {
     const newVisibleUsers: Record<string, User[]> = {};
     let remainingItems = this.internalChunkSize;
 
-    for (const key of Object.keys(this.allLoadedUsers)) {
-      const usersInCategory = this.allLoadedUsers[key];
+    for (const key of Object.keys(this.groupedUsers)) {
+      const usersInCategory = this.groupedUsers[key];
       const visibleInCategory = this.visibleUsers[key]?.length || 0;
 
       if (usersInCategory.length > 0 && remainingItems > 0) {
@@ -137,6 +164,7 @@ export class UserHubComponent implements OnInit {
 
     this.visibleUsers = newVisibleUsers;
   }
+
 
   /**
    * Handles the near-end scroll event to load more users.
