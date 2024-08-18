@@ -8,10 +8,12 @@
     <li><span>{{ user().nat }}</span></li>
   </ul>
   <ul [attr.expanded]="isExpanded">
+    @if(isExpanded) {
     <li><span>Date of Birth: {{ user().dob?.date | date }} ({{user().dob?.age}})</span></li>
     <li><span>Address: {{user().formattedAddress}}</span></li>
     <li><span>Email: {{ user().email }}</span></li>
     <li><span>Phone: {{ user().phone }}</span></li>
     <li><span>Nationality: {{ user().nat }}</span></li>
+    }
   </ul>
 </div>
