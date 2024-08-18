@@ -5,11 +5,12 @@ import { UsersServiceStub } from '../../services/users.service.stub';
 import { UsersService } from '../../services/users.service';
 import { ScrollNearEdgeDirective } from '../../directives/scroll-near-end.directive';
 import { SearchComponent } from '../../components/search/search.component';
+import { SelectDropdownComponent, SelectOption } from '../../components/select-dropdown/select-dropdown.component';
 
 @Component({
   selector: 'app-user-hub',
   standalone: true,
-  imports: [UserListComponent, ScrollNearEdgeDirective, SearchComponent],
+  imports: [UserListComponent, ScrollNearEdgeDirective, SearchComponent, SelectDropdownComponent],
   templateUrl: './user-hub.component.html',
   styleUrls: ['./user-hub.component.scss']
 })
@@ -21,7 +22,8 @@ export class UserHubComponent implements OnInit {
   users: User[] = [];
   filteredUsers = signal<User[]>([]);
 
-  category = 'nat';
+  category = signal<string>('nat');
+
   displayedPages: number[] = [];
   private internalChunkSize = 20;
   private currentInternalIndex = 0;  // Track how many users have been loaded
@@ -32,9 +34,14 @@ export class UserHubComponent implements OnInit {
   };
   loading = false;
 
+  categoryOptions: SelectOption[] = [
+    { label: 'Nationality', value: 'nat' },
+    { label: 'Gender', value: 'gender' },
+  ];
+
   constructor() {
     effect(() => {
-      this.groupUsers(this.category, this.filteredUsers());
+      this.groupUsers(this.category(), this.filteredUsers());
     })
   }
 
@@ -79,11 +86,11 @@ export class UserHubComponent implements OnInit {
     this.visibleUsers = {};
     if (searchTerm) {
       this.filteredUsers.set(this.users.filter(user => `${user.firstname} ${user.lastname}`.toLowerCase().includes(searchTerm.toLowerCase())));
-      this.groupUsers(this.category, this.filteredUsers());
+      this.groupUsers(this.category(), this.filteredUsers());
       this.updateDisplayedPages();
     } else {
       this.filteredUsers.set(this.users);
-      this.groupUsers(this.category, this.filteredUsers());
+      this.groupUsers(this.category(), this.filteredUsers());
       this.updateDisplayedPages();
     }
   }
@@ -136,7 +143,7 @@ export class UserHubComponent implements OnInit {
         this.users = users;
         this.pagination.currentPage = page;
         this.currentInternalIndex = 0;
-        this.groupUsers(this.category);
+        this.groupUsers(this.category());
         this.updateDisplayedPages();
       }, complete: () => {
         this.loading = false;

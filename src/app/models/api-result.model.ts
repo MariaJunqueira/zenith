@@ -50,6 +50,7 @@ export interface UserResult {
   phone: string
   picture: Picture
   nat: string
+  gender: string
   login: Login
   location: Location
   dob: DateOfBirthday

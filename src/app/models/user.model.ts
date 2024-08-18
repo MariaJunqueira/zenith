@@ -32,6 +32,7 @@ export class User {
   phone?: string
   image?: string
   nat?: string
+  gender?: string
   login?: LoginInfo
   location?: Location
   dob?: DateOfBirthday
@@ -72,6 +73,7 @@ export class User {
       image: user.picture.medium,
       location: user.location,
       nat: user.nat,
+      gender: user.gender,
       login: user.login,
       dob: user.dob,
       index: i

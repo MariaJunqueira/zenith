@@ -3,9 +3,7 @@
   <section>
     <div>
       <app-search (searchChange)="onSearch($event)"></app-search>
-      <select name="" id="">
-        <option value="">Select a category</option>
-      </select>
+      <app-select-dropdown [options]="categoryOptions" [(selectedValue)]="category"></app-select-dropdown>
     </div>
   </section>
   }
