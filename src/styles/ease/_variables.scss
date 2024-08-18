@@ -336,6 +336,7 @@ $icon-sizes: (
 /*
  * BORDERS
  */
+$border-size-xxs: 6px !default;
 $border-size-xs: 8px !default;
 $border-size-s: 10px !default;
 $border-size-m: 12px !default;
@@ -345,6 +346,7 @@ $border-size-xxl: 18px !default;
 $border-size-xxxl: 24px !default;
 
 $border-sizes: (
+  xxs: $border-size-xxs,
   xs: $border-size-xs,
   s: $border-size-s,
   m: $border-size-m,
