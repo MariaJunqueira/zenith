@@ -14,7 +14,7 @@ import { SearchComponent } from '../../components/search/search.component';
   styleUrls: ['./user-hub.component.scss']
 })
 export class UserHubComponent implements OnInit {
-  usersService = inject(UsersServiceStub);
+  usersService = inject(UsersService);
   groupedUsers: Record<string, User[]> = {};
   visibleUsers: Record<string, User[]> = {}; // To hold the currently visible users
   allLoadedUsers: Record<string, User[]> = {}; // To hold all users that have been loaded
@@ -28,8 +28,9 @@ export class UserHubComponent implements OnInit {
 
   pagination = {
     currentPage: 1,
-    pageSize: 5000,
+    pageSize: 100,
   };
+  loading = false;
 
   constructor() {
     effect(() => {
@@ -129,12 +130,17 @@ export class UserHubComponent implements OnInit {
    * @param page The page number to load.
    */
   loadUsers(page: number): void {
-    this.usersService.getUsers(page, this.pagination.pageSize).subscribe(users => {
-      this.users = users;
-      this.pagination.currentPage = page;
-      this.currentInternalIndex = 0;
-      this.groupUsers(this.category);
-      this.updateDisplayedPages();
+    this.loading = true;
+    this.usersService.getUsers(page, this.pagination.pageSize).subscribe({
+      next: (users) => {
+        this.users = users;
+        this.pagination.currentPage = page;
+        this.currentInternalIndex = 0;
+        this.groupUsers(this.category);
+        this.updateDisplayedPages();
+      }, complete: () => {
+        this.loading = false;
+      }
     });
   }
 
