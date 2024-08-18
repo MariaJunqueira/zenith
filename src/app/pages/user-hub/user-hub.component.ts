@@ -209,6 +209,7 @@ export class UserHubComponent implements OnInit {
    */
   onPageChange(page: number): void {
     if (page > 0) {
+      this.resetVisibleItems();
       this.loadUsers(page);
     }
   }

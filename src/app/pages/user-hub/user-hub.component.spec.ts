@@ -5,12 +5,50 @@ import { UsersService } from '../../services/users.service';
 import { of } from 'rxjs';
 import { User } from '../../models/user.model';
 import { provideHttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 describe('UserHubComponent', () => {
   let component: UserHubComponent;
   let fixture: ComponentFixture<UserHubComponent>;
   let usersService: UsersService;
-  let mockUsers: User[];
+  let mockUsers: User[] = [
+    new User({
+      firstname: 'Marisela',
+      lastname: 'Fonseca',
+      email: 'marisela.fonseca@example.com',
+      phone: '(667) 475 7275',
+      nat: 'MX',
+      dob: { date: '1954-07-06T23:54:44.130Z', age: 69 },
+      gender: 'female',
+      image: 'https://randomuser.me/api/portraits/women/5.jpg',
+      location: {
+        street: { number: 8003, name: 'Peatonal Rosales' },
+        city: 'Las Vigas',
+        state: 'Guerrero',
+        country: 'Mexico',
+        postcode: 25269,
+        timezone: { offset: '+5:00', description: 'Ekaterinburg, Islamabad, Karachi, Tashkent' }
+      }
+    }),
+    new User({
+      firstname: 'Berardo',
+      lastname: 'Nogueira',
+      email: 'berardo.nogueira@example.com',
+      phone: '(58) 6717-4929',
+      nat: 'BR',
+      dob: { date: '1997-07-22T05:50:14.179Z', age: 26 },
+      gender: 'male',
+      image: 'https://randomuser.me/api/portraits/men/67.jpg',
+      location: {
+        street: { number: 5797, name: 'Rua João Xxiii' },
+        city: 'Muriaé',
+        state: 'Roraima',
+        country: 'Brazil',
+        postcode: 46976,
+        timezone: { offset: '-3:30', description: 'Newfoundland' }
+      }
+    })
+  ];
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -20,7 +58,17 @@ describe('UserHubComponent', () => {
       providers: [
         UsersService,
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              data: {
+                users: mockUsers
+              }
+            }
+          }
+        }
       ],
     }).compileComponents();
   }));
@@ -81,7 +129,6 @@ describe('UserHubComponent', () => {
 
   it('should load users on initialization', () => {
     expect(component.users).toEqual(mockUsers);
-    expect(usersService.getUsers).toHaveBeenCalledWith(1, component.pagination.pageSize);
   });
 
   it('should group users by category', (done) => {
