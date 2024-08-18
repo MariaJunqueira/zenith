@@ -289,6 +289,7 @@ $breakpoints: (
 /*
  * SPACINGS
  */
+$spacing-xxxs: 1px !default;
 $spacing-xxs: 2px !default;
 $spacing-xs: 4px !default;
 $spacing-s: 8px !default;
@@ -301,6 +302,7 @@ $spacing-xxxxl: 40px !default;
 
 $spacings: (
   0: 0,
+  xxxs: $spacing-xxxs,
   xxs: $spacing-xxs,
   xs: $spacing-xs,
   s: $spacing-s,
