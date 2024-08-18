@@ -1,23 +1,17 @@
 <div class="user-item" (click)="toggleExpansion()" [attr.expanded]="isExpanded">
-  <img class="user-item__image" loading="lazy" [src]="user().imageSrc"
-    alt="{{ user().firstname }} {{ user().lastname }}" />
-
-  <p class="user-item__name">
-    {{ user().firstname }} {{ user().lastname }}
-  </p>
-
-  <p class="user-item__email">{{ user().email }}</p>
-
-  <p class="user-item__phone">{{ user().phone }}</p>
-
-  <p class="user-item__nat">{{ user().nat }}</p>
-
-  @if (isExpanded) {
-  <div class="user-extra-info">
-    <p class="user-item__dob">Date of Birth: {{ user().dob?.date | date }} ({{user().dob?.age}})</p>
-    <p class="user-item__address">
-      Address: {{user().formattedAddress}}
-    </p>
-  </div>
-  }
+  <ul>
+    <li><img width="40" height="40" [src]="user().imageSrc" alt="{{ user().firstname }} {{ user().lastname }}"
+        loading="lazy" /></li>
+    <li><span>{{ user().firstname }} {{ user().lastname }}</span></li>
+    <li><span>{{ user().email }}</span></li>
+    <li><span>{{ user().phone }}</span></li>
+    <li><span>{{ user().nat }}</span></li>
+  </ul>
+  <ul [attr.expanded]="isExpanded">
+    <li><span>Date of Birth: {{ user().dob?.date | date }} ({{user().dob?.age}})</span></li>
+    <li><span>Address: {{user().formattedAddress}}</span></li>
+    <li><span>Email: {{ user().email }}</span></li>
+    <li><span>Phone: {{ user().phone }}</span></li>
+    <li><span>Nationality: {{ user().nat }}</span></li>
+  </ul>
 </div>

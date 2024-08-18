@@ -1,48 +1,110 @@
 @import "ease/ease-import.scss";
 
 :host {
+  display: flex;
+  flex-direction: column;
+
+  &:not(:last-of-type) {
+    border-bottom: $spacing-xxs solid $color-fog;
+  }
+
   .user-item {
-    align-items: center;
-    border-bottom: 1px solid $color-fog;
-    display: flex;
-    flex-wrap: nowrap;
-    height: 60px;
-    padding: 12px;
+    padding: $spacing-m;
     color: $color-night;
+    display: flex;
+    flex-direction: column;
 
-    &__image {
-      border-radius: 20%;
-      height: 40px;
-      width: 40px;
-    }
+    ul {
+      display: flex;
 
-    &__name,
-    &__email,
-    &__phone {
-      margin: 12px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: left;
-      white-space: nowrap;
-    }
+      &:nth-of-type(1) {
+        align-items: center;
+        gap: $spacing-l;
+        justify-content: space-between;
+        cursor: pointer;
 
-    &__name {
-      flex: 1;
-      min-width: 100px;
-    }
+        li {
+          display: block;
+          flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
 
-    &__email {
-      width: 220px;
-    }
+          &:first-child {
+            display: flex;
+            flex: 0 0 $spacing-xxxxl;
 
-    &__phone {
-      width: 110px;
-    }
+            img {
+              border-radius: 100%;
+            }
+          }
 
-    &__nat {
-      margin-left: 12px;
-      text-align: right;
-      width: 80px;
+          &:nth-of-type(2) {
+            flex: 0 1 33%;
+          }
+
+          &:nth-of-type(3) {
+            flex: 0 1 44%;
+          }
+
+          &:nth-of-type(4) {
+            flex: 0 1 23%;
+          }
+
+          &:last-child {
+            display: flex;
+            flex: 0 0 $spacing-xxxxl;
+            justify-content: flex-end;
+          }
+        }
+
+        @media (max-width: $s) {
+          li {
+            &:not(:nth-of-type(1), :nth-of-type(2)) {
+              display: none;
+            }
+
+            &:nth-of-type(2) {
+              flex: 1;
+            }
+          }
+        }
+      }
+
+      &:nth-of-type(2) {
+        height: 0;
+        overflow: hidden;
+        flex-direction: column;
+        transition: height 0.5s ease-in-out;
+
+        &[expanded="true"] {
+          height: 70px;
+
+          @media (max-width: $s) {
+            height: 160px;
+          }
+        }
+
+        li {
+          padding-top: $spacing-xs;
+
+          &:nth-of-type(1) {
+            margin-top: $spacing-l;
+            padding-top: $spacing-s;
+            border-top: $spacing-xxxs solid var(--color-sky);
+          }
+
+          &:not(:nth-of-type(1), :nth-of-type(2)) {
+            display: none;
+          }
+
+          @media (max-width: $s) {
+            &:is(:nth-of-type(3), :nth-of-type(4), :nth-of-type(5)) {
+              display: block;
+            }
+          }
+        }
+      }
     }
   }
 }
