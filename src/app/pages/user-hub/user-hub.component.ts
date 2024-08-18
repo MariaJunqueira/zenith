@@ -27,10 +27,10 @@ export class UserHubComponent implements OnInit {
   private internalChunkSize = 20;
   private currentInternalIndex = 0;  // Track how many users have been loaded
 
-  category = signal<string>('dob.age');
+  category = signal<string>('firstname');
   categoryOptions: SelectOption[] = [
-    { label: 'Age', value: 'dob.age' },
     { label: 'Alphabetically', value: 'firstname' },
+    { label: 'Age', value: 'dob.age' },
     { label: 'Gender', value: 'gender' },
     { label: 'Nationality', value: 'nat' },
   ];
