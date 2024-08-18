@@ -82,6 +82,10 @@ function groupItemsByCategory<T>(items: T[], groupedItems: Record<string, T[]>, 
  * @returns The value of the property at the given path.
  */
 function getNestedValue<T>(obj: T, path: string): any {
-  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  return path.split('.').reduce((acc: any, part: string) => {
+    if (acc && typeof acc === 'object' && part in acc) {
+      return acc[part as keyof typeof acc];
+    }
+    return undefined;
+  }, obj);
 }
-
