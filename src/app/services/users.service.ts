@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 
 import { ApiResult } from '../models/api-result.model';
 import { User } from '../models/user.model';
+import { PAGE_SIZE } from '../models/pagination.const';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class UsersService {
    * @param { number } pageSize The number of users to load per page.
    * @returns An observable containing a list of users.
    */
-  getUsers(page: number, pageSize: number = 50): Observable<User[]> {
+  getUsers(page: number, pageSize: number = PAGE_SIZE): Observable<User[]> {
     // Check if the data is already in cache
     if (this.cache[page]) {
       return of(this.cache[page]);

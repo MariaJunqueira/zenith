@@ -7,6 +7,7 @@ import { UserListComponent } from '../../components/user-list/user-list.componen
 import { ScrollNearEdgeDirective } from '../../directives/scroll-near-end.directive';
 import { User } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
+import { PAGE_SIZE } from '../../models/pagination.const';
 
 @Component({
   selector: 'app-user-hub',
@@ -40,7 +41,7 @@ export class UserHubComponent implements OnInit {
 
   pagination = {
     currentPage: 1,
-    pageSize: 50,
+    pageSize: PAGE_SIZE,
   };
 
   loading = false;
