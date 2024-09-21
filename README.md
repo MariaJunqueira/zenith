@@ -1,4 +1,4 @@
-# Awork Challenge
+# Zenith
 
 Live version available [here](https://zenith-3c5dc.web.app/users)
 
