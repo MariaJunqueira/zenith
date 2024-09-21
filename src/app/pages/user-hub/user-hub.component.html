@@ -1,0 +1,35 @@
+<section class="user-hub">
+  @if (!loading) {
+  <ul class="user-filter">
+    <li>
+      <app-search (searchChange)="onSearch($event)"></app-search>
+    </li>
+    <li>
+      <app-select-dropdown [options]="categoryOptions" [(selectedValue)]="category"
+        (selectedValueChange)="resetVisibleItems()"></app-select-dropdown>
+    </li>
+  </ul>
+  @if (getGroupKeys().length) {
+  <article class="user-container" appScrollNearEdge (nearEdge)="onNearEdgeScroll($event)">
+    @for (groupKey of getGroupKeys(); track $index) {
+    <h3>{{ groupKey }} ({{groupedUsers[groupKey].length}})</h3>
+    <app-user-list [users]="visibleUsers[groupKey]"></app-user-list>
+    }
+  </article>
+  }
+  <nav class="user-pagination">
+    <button (click)="onPageChange(pagination.currentPage - 1)"
+      [disabled]="pagination.currentPage === 1">Previous</button>
+    @for (page of displayedPages; track $index) {
+    <button [class.active]="page === pagination.currentPage" (click)="onPageChange(page)">
+      {{ page }}
+    </button>
+    }
+    <button (click)="onPageChange(pagination.currentPage + 1)">Next</button>
+  </nav>
+  } @else {
+  <div class="user-loading">
+    <p>Loading...</p>
+  </div>
+  }
+</section>

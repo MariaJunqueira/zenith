@@ -1,6 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { User } from '../../models/user.model'
-import { UserItemComponent } from '../user-item/user-item.component'
+
+import { User } from '../../models/user.model';
+import { UserItemComponent } from '../user-item/user-item.component';
 
 @Component({
   selector: 'app-user-list',
@@ -8,9 +10,10 @@ import { UserItemComponent } from '../user-item/user-item.component'
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
   imports: [
+    CommonModule,
     UserItemComponent
   ]
 })
 export class UserListComponent {
-  users = input.required<User[]>()
+  users = input.required<User[]>();
 }

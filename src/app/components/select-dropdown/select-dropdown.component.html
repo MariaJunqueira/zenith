@@ -1,0 +1,8 @@
+<label>
+  <span class="small">Group by</span>
+  <select [value]="selectedValue()" (change)="onSelectChange($event)">
+    @for (option of options(); let i = $index; track i) {
+    <option [value]="option.value">{{ option.label }}</option>
+    }
+  </select>
+</label>

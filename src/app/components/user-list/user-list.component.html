@@ -1,11 +1,11 @@
-@if (users().length) {
-  <article class="user-list">
+<article class="user-list">
+  @if (users().length > 0) {
+  <section class="user-group">
     @for (user of users(); track $index) {
-      <app-user-item [user]="user" [allUsers]="users()" />
+    <app-user-item [user]="user" [allUsers]="users()"></app-user-item>
     }
-  </article>
-} @else {
-  <article class="user-list">
-    <p>Loading…</p>
-  </article>
-}
+  </section>
+  } @else {
+  <p>No users available</p>
+  }
+</article>
