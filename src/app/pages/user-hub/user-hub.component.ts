@@ -26,9 +26,10 @@ export class UserHubComponent implements OnInit {
   displayedPages: number[] = [];
   visibleUsers: Record<string, User[]> = {}; // To hold the currently visible users
   allLoadedUsers: Record<string, User[]> = {}; // To hold all users that have been loaded
+
   private internalChunkSize = 20;
   private currentInternalIndex = 0;  // Track how many users have been loaded
-
+  private worker!: Worker;
   category = signal<string>('firstname');
   categoryOptions: SelectOption[] = [
     { label: 'Alphabetically', value: 'firstname' },
@@ -52,6 +53,10 @@ export class UserHubComponent implements OnInit {
 
   ngOnInit(): void {
     this.users = this.activatedRoute.snapshot.data['users'];
+
+    if (typeof Worker !== 'undefined') {
+      this.worker = new Worker(new URL('../../workers/data-categorization.worker', import.meta.url));
+    }
   }
 
   resetVisibleItems() {
@@ -68,8 +73,7 @@ export class UserHubComponent implements OnInit {
    */
   private groupUsers(category: string, users?: User[]): void {
     if (typeof Worker !== 'undefined') {
-      const worker = new Worker(new URL('../../workers/data-categorization.worker', import.meta.url));
-      worker.onmessage = ({ data }) => {
+      this.worker.onmessage = ({ data }) => {
         const groupedData = data as Record<string, Partial<User>[]>;
 
         const groupedUsers = this.mapToUserInstances(groupedData);
@@ -79,10 +83,9 @@ export class UserHubComponent implements OnInit {
         this.allLoadedUsers = { ...this.groupedUsers };
 
         this.updateVisibleUsers();
-        worker.terminate();
       };
 
-      worker.postMessage({ items: users || this.users, category });
+      this.worker.postMessage({ items: users || this.users, category });
     } else {
       this.groupedUsers = this.fallbackGrouping(users || this.users, category);
       this.allLoadedUsers = { ...this.groupedUsers }; // Store all grouped users in `allLoadedUsers`
@@ -223,5 +226,11 @@ export class UserHubComponent implements OnInit {
     const pagesToShow = 3;
 
     this.displayedPages = Array.from({ length: pagesToShow }, (_, index) => currentPage + index);
+  }
+
+  ngOnDestroy(): void {
+    if (this.worker) {
+      this.worker.terminate();
+    }
   }
 }
