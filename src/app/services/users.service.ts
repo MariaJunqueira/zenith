@@ -31,7 +31,7 @@ export class UsersService {
 
     // If not cached, fetch from the API
     return this.httpClient
-      .get<ApiResult>(`${this.apiUrl}?&results=${pageSize}&seed=awork&page=${page}`)
+      .get<ApiResult>(`${this.apiUrl}?&results=${pageSize}&seed=zenith&page=${page}`)
       .pipe(
         map(apiResult => User.mapFromUserResult(apiResult.results)),
         tap(users => {

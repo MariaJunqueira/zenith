@@ -5611,7 +5611,7 @@ export const MockResult: MockedResult = {
     }
   ],
   "info": {
-    "seed": "awork",
+    "seed": "zenith",
     "results": 100,
     "page": 1
   }
