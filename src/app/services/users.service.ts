@@ -22,7 +22,7 @@ export class UsersService {
    * @param { number } pageSize The number of users to load per page.
    * @returns An observable containing a list of users.
    */
-  getUsers(page: number, pageSize: number = 5000): Observable<User[]> {
+  getUsers(page: number, pageSize: number = 50): Observable<User[]> {
     // Check if the data is already in cache
     if (this.cache[page]) {
       return of(this.cache[page]);

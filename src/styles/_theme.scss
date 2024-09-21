@@ -1,0 +1,92 @@
+:root {
+  --bg-primary-light-1: #ffffff;
+  --bg-primary: #ffebcc; /* Pastel Peach */
+  --bg-primary-contrast: #4a4a4a;
+  --bg-secondary: #e2f0cb; /* Pastel Green */
+  --bg-secondary-contrast: #4a4a4a;
+  --bg-tertiary: #d1e7ff; /* Pastel Blue */
+  --bg-tertiary-contrast: #4a4a4a;
+
+  /* Tints of Pastel Peach */
+  --bg-primary-light-1: #fff0d9; /* Lighter Peach */
+  --bg-primary-light-2: #fff5e6; /* Even Lighter Peach */
+  --bg-primary-light-3: #fffaf2; /* Very Light Peach */
+  --bg-primary-light-4: #ffffff; /* Pure White */
+
+  /* Shades of Pastel Peach */
+  --bg-primary-dark-1: #ccbca3; /* Darker Peach */
+  --bg-primary-dark-2: #998d7a; /* Even Darker Peach */
+  --bg-primary-dark-3: #665e52; /* Very Dark Peach */
+  --bg-primary-dark-4: #332f29; /* Deepest Shade */
+
+  /* Buttons */
+  --button-disabled: #b0b0b0;
+  --button-disabled-contrast: #ffffff;
+  --button-disabled-hover: #a0a0a0;
+  --button-disabled-hover-contrast: #ffffff;
+
+  --button-primary: #ffebcc; /* Pastel Peach */
+  --button-primary-contrast: #4a4a4a;
+  --button-primary-hover: #ffdbc2;
+  --button-primary-hover-contrast: #4a4a4a;
+
+  --button-quaternary: #ffffff;
+  --button-quaternary-contrast: #4a4a4a;
+  --button-quaternary-hover: #f5f5f0;
+  --button-quaternary-hover-contrast: #4a4a4a;
+
+  --button-secondary: #d1e7ff; /* Pastel Blue */
+  --button-secondary-contrast: #4a4a4a;
+  --button-secondary-hover: #c3dfff;
+  --button-secondary-hover-contrast: #4a4a4a;
+
+  --button-tertiary: transparent;
+  --button-tertiary-contrast: #4a4a4a;
+  --button-tertiary-hover: #4a4a4a;
+  --button-tertiary-hover-contrast: #ffffff;
+
+  /* Graphics */
+  --graphic-primary: #ffebcc; /* Pastel Peach */
+  --graphic-secondary: #4a4a4a;
+  --graphic-tertiary: #ffffff;
+
+  /* Logos */
+  --logo-primary: #4a4a4a;
+  --logo-secondary: #ffffff;
+  --logo-tertiary: #4a4a4a;
+
+  /* Notifications */
+  --notification-action: #ddb3e3; /* Pastel Lavender */
+  --notification-action-contrast: #4a4a4a;
+  --notification-disabled: #eaeaea;
+  --notification-disabled-contrast: #4a4a4a;
+  --notification-error: #ffc9c9; /* Pastel Red */
+  --notification-error-contrast: #4a4a4a;
+  --notification-info: #c9e0ff; /* Pastel Sky Blue */
+  --notification-info-contrast: #4a4a4a;
+  --notification-success: #d1f7c4; /* Pastel Green */
+  --notification-success-contrast: #4a4a4a;
+  --notification-warning: #ffe4b3; /* Pastel Yellow */
+  --notification-warning-contrast: #4a4a4a;
+
+  /* Text */
+  --text-disabled: #4a4a4a;
+  --text-link: #92a8d1; /* Pastel Blue */
+  --text-notification: #4a4a4a;
+  --text-primary: #4a4a4a;
+  --text-primary-hover: #5a5a5a;
+  --text-secondary: #4a4a4a;
+  --text-secondary-hover: #5a5a5a;
+  --text-tertiary: #4a4a4a;
+  --text-tertiary-hover: #5a5a5a;
+
+  /* Borders */
+  --border-primary: #ffebcc; /* Pastel Peach */
+  --border-secondary: #e2f0cb; /* Pastel Green */
+  --border-tertiary: #d1e7ff; /* Pastel Blue */
+  --border-disabled: #b0b0b0; /* Light Grey */
+  --border-error: #ffc9c9; /* Pastel Red */
+  --border-warning: #ffe4b3; /* Pastel Yellow */
+  --border-success: #d1f7c4; /* Pastel Green */
+  --border-info: #c9e0ff; /* Pastel Sky Blue */
+}

@@ -1,0 +1,43 @@
+html,
+body {
+  font:
+    400 100% SuisseIntl,
+    arial,
+    helvetica,
+    sans-serif;
+  font-size: 18px;
+  height: 100%;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--bg-primary-light-3) 0%,
+    var(--bg-primary-light-2) 53%,
+    var(--bg-primary-light-3) 100%
+  );
+
+  @media only screen and (prefers-color-scheme: dark) {
+    background: linear-gradient(
+      to bottom,
+      var(--bg-primary-light-3) 0%,
+      var(--bg-primary-light-2) 53%,
+      var(--bg-primary-light-3) 100%
+    );
+  }
+
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
+}
+
+b,
+strong {
+  font-weight: 700;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}

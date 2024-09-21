@@ -93,7 +93,7 @@ I incorporated basic caching mechanisms and loading indicators to optimize resou
 
 ### 6. Removing Duplicate CSS and Optimizing Styles
 
-To improve CSS performance and maintainability, I removed duplicate CSS from the `_typography.scss` file, preventing unnecessary overwrites. Additionally, I delegated the responsibility for setting HTML and BODY styles to the `ease-styles.scss` file, which streamlined the style management across the application.
+To improve CSS performance and maintainability, I removed duplicate CSS from the `_typography.scss` file, preventing unnecessary overwrites. Additionally, I delegated the responsibility for setting HTML and BODY styles to the `default.scss` file, which streamlined the style management across the application.
 
 ### 7. Avoiding the `*` Selector in CSS
 

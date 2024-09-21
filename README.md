@@ -75,19 +75,8 @@ The project includes several SCSS files that define and manage the styles used t
 
 ### Additional Styles
 
-- **Files:** `ease-import.scss`, `ease-styles.scss`
+- **Files:** `ease-import.scss`, `default.scss`
 - **Description:** These files contain additional imports and styles specific to this project’s needs, ensuring that all styles are loaded and applied correctly.
-
-### How to Use
-
-To use these variables and mixins in your components, make sure to import the relevant SCSS files at the top of your component’s stylesheet, like this:
-
-```scss
-@import "ease/ease-import.scss";
-@import 'ease/ease-styles';
-```
-
-This allows you to apply the predefined variables and mixins directly in your component’s styles.
 
 ## Need More Help?
 

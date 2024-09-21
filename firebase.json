@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/awork-challenge/browser",
+    "public": "dist/zenith/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

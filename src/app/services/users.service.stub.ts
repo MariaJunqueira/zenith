@@ -10,11 +10,11 @@ import { MockResult } from '../mock-data';
 export class UsersServiceStub {
 
   /**
-   * Fetches 5000 mock users from the api
+   * Fetches 50 mock users from the api
    * @param {number} page
    * @returns {Observable<User[]>}
    */
-  getUsers(page: number = 1, pageSize: number = 5000): Observable<User[]> {
+  getUsers(page: number = 1, pageSize: number = 50): Observable<User[]> {
     return of(MockResult).pipe(
       map(apiResult => User.mapFromUserResult(apiResult.results as UserResult[]))
     );

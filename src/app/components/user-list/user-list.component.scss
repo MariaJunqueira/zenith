@@ -1,13 +1,11 @@
-@import 'ease/ease-import.scss';
-
 .user-list {
-  padding: $spacing-m;
+  padding: 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: $border-size-xxs solid var(--color-sky);
-  border-radius: $border-size-m;
-  background-color: var(--color-white);
+  border: 1px solid var(--bg-primary-dark-1);
+  border-radius: 4px;
+  background-color: var(--bg-primary-light-1);
 }
 
 :host {

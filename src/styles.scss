@@ -1,2 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-@import 'ease/ease-styles';
+@import "./styles/reset";
+@import "./styles/default";
+@import "./styles/theme";
+@import "./styles/typography";

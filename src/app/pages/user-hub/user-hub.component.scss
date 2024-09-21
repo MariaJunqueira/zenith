@@ -1,32 +1,30 @@
-@import "ease/ease-import.scss";
-
 .user-hub {
   width: 60%;
   margin: 0 auto;
-  padding: $spacing-xxxxl 0;
+  padding: 40px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $spacing-xxxxl;
+  gap: 40px;
 
-  @media (max-width: $l) {
+  @media (max-width: 1280px) {
     width: 80%;
   }
 
-  @media (max-width: $m) {
+  @media (max-width: 768px) {
     width: 90%;
   }
 
   .user-filter {
     width: 100%;
-    padding: $spacing-m;
+    padding: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: $spacing-xl;
-    border: $border-size-xxs solid var(--color-sky);
-    border-radius: $border-size-m;
-    background-color: var(--color-white);
+    gap: 24px;
+    border: 1px solid var(--bg-primary-dark-1);
+    border-radius: 4px;
+    background-color: var(--bg-primary-light-1);
 
     li {
       &:nth-of-type(1) {
@@ -45,9 +43,9 @@
     flex-direction: column;
     align-items: center;
 
-    h2 {
+    h3 {
       width: 100%;
-      padding: 0 0 $spacing-m $spacing-m;
+      padding: 0 0 8px 8px;
       text-transform: capitalize;
     }
 
@@ -55,7 +53,7 @@
       width: 100%;
 
       &:not(:last-of-type) {
-        margin-bottom: $spacing-xxxl;
+        margin-bottom: 32px;
       }
     }
   }
@@ -65,20 +63,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: $spacing-s;
+    gap: 12px;
 
     & > button {
-      padding: $spacing-l;
+      padding: 24px;
     }
   }
 
   .user-loading {
     width: 100%;
-    padding: $spacing-m;
+    padding: 8px;
     display: flex;
     justify-content: center;
-    border: $border-size-xxs solid var(--color-sky);
-    border-radius: $border-size-m;
-    background-color: var(--color-white);
+    border: 1px solid var(--bg-primary-dark-1);
+    border-radius: 4px;
+    background-color: var(--bg-primary-light-1);
   }
 }

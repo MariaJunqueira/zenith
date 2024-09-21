@@ -1,16 +1,14 @@
-@import "ease/ease-import.scss";
-
 :host {
   display: flex;
   flex-direction: column;
 
   &:not(:last-of-type) {
-    border-bottom: $spacing-xxs solid $color-fog;
+    border-bottom: 4px solid var(--bg-primary-dark-1);
   }
 
   .user-item {
-    padding: $spacing-m;
-    color: $color-night;
+    padding: 8px;
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
 
@@ -19,7 +17,7 @@
 
       &:nth-of-type(1) {
         align-items: center;
-        gap: $spacing-l;
+        gap: 24px;
         justify-content: space-between;
         cursor: pointer;
 
@@ -32,7 +30,7 @@
 
           &:first-child {
             display: flex;
-            flex: 0 0 $spacing-xxxxl;
+            flex: 0 0 40px;
 
             img {
               border-radius: 100%;
@@ -53,12 +51,12 @@
 
           &:last-child {
             display: flex;
-            flex: 0 0 $spacing-xxxxl;
+            flex: 0 0 40px;
             justify-content: flex-end;
           }
         }
 
-        @media (max-width: $s) {
+        @media (max-width: 480px) {
           li {
             &:not(:nth-of-type(1), :nth-of-type(2)) {
               display: none;
@@ -80,25 +78,25 @@
         &[expanded="true"] {
           height: 70px;
 
-          @media (max-width: $s) {
+          @media (max-width: 480px) {
             height: 160px;
           }
         }
 
         li {
-          padding-top: $spacing-xs;
+          padding-top: 8px;
 
           &:nth-of-type(1) {
-            margin-top: $spacing-l;
-            padding-top: $spacing-s;
-            border-top: $spacing-xxxs solid var(--color-sky);
+            margin-top: 24px;
+            padding-top: 12px;
+            border-top: 2px solid var(--bg-primary);
           }
 
           &:not(:nth-of-type(1), :nth-of-type(2)) {
             display: none;
           }
 
-          @media (max-width: $s) {
+          @media (max-width: 480px) {
             &:is(:nth-of-type(3), :nth-of-type(4), :nth-of-type(5)) {
               display: block;
             }

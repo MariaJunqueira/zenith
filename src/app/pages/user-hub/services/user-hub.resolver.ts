@@ -10,6 +10,6 @@ export class UserHubResolver {
   constructor(private usersService: UsersService) { }
 
   resolve() {
-    return this.usersService.getUsers(1, 5000);
+    return this.usersService.getUsers(1, 50);
   }
 }

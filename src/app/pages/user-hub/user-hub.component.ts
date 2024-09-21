@@ -39,7 +39,7 @@ export class UserHubComponent implements OnInit {
 
   pagination = {
     currentPage: 1,
-    pageSize: 5000,
+    pageSize: 50,
   };
 
   loading = false;

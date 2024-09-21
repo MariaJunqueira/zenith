@@ -12,7 +12,7 @@
   @if (getGroupKeys().length) {
   <article class="user-container" appScrollNearEdge (nearEdge)="onNearEdgeScroll($event)">
     @for (groupKey of getGroupKeys(); track $index) {
-    <h2>{{ groupKey }} ({{groupedUsers[groupKey].length}})</h2>
+    <h3>{{ groupKey }} ({{groupedUsers[groupKey].length}})</h3>
     <app-user-list [users]="visibleUsers[groupKey]"></app-user-list>
     }
   </article>
