@@ -18,6 +18,9 @@
     }
   </article>
   }
+  @else {
+  <p>No user found with this search term</p>
+  }
 
   <nav class="user-pagination">
     <button (click)="onPageChange(pagination.currentPage - 1)"
