@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ScrollNearEdgeDirective } from './scroll-near-end.directive';
+import { ScrollNearEdgeDirective } from './scroll-near-edge.directive';
 
 @Component({
   template: `<div appScrollNearEdge (nearEdge)="onNearEdge($event)" style="height: 2000px; overflow: auto;"></div>`,

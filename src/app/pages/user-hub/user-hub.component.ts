@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SearchComponent } from '../../components/search/search.component';
 import { SelectDropdownComponent, SelectOption } from '../../components/select-dropdown/select-dropdown.component';
 import { UserListComponent } from '../../components/user-list/user-list.component';
-import { ScrollNearEdgeDirective } from '../../directives/scroll-near-end.directive';
+import { ScrollNearEdgeDirective } from '../../directives/scroll-near-edge.directive';
 import { User } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 import { PAGE_SIZE } from '../../models/pagination.const';
