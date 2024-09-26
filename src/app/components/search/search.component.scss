@@ -3,5 +3,8 @@
 
   input {
     width: 100%;
+    background-color: transparent;
+    padding: 4px 0;
+    border-bottom: 2px solid var(--bg-primary-dark-1);
   }
 }
